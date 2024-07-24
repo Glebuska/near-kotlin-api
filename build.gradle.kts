@@ -29,6 +29,7 @@ dependencies {
     implementation("io.insert-koin:koin-core:$koin_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("com.syntifi.crypto:crypto-key-ed25519:$cryptoKeyEd25519Version")
+    // implementation("io.github.funkatronics:kborsh:0.1.0")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("borshj-*.jar"))))
 }
 

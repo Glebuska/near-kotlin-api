@@ -1,17 +1,19 @@
 package org.near
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.statement.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.java.KoinJavaComponent.inject
+import org.near.client.RequestParams
+import org.near.client.RpcRequest
 import org.near.di.module
-import org.near.model.RpcRequest
+import org.near.model.Account
+import org.near.model.KeyPairEd25519
 
 @Serializable
 data class Params(
@@ -72,57 +74,31 @@ suspend fun main() {
             id = dontCareId,
             method = "query",
             params =
-                Params(
+                RequestParams(
                     requestType = "view_account",
                     finality = "optimistic",
                     accountId = accountId,
                 ),
         )
+
     val response: String =
-        client
-            .post {
-                setBody(request)
-            }.body()
-
-    println(response)
-
-// send near
-//
-//    val transaction =
-//        Transaction(
-//            signerId = accountId,
-//            publicKey = signer.publicKey,
-//            nonce = currentNonce + 1,
-//            receiverId = "nosedive.testnet",
-//            blockHash = accessKeyQueryResponse.result.blockHash,
-//            actions =
-//                listOf(
-//                    Action(
-//                        methodName = "rate",
-//                        args = buildJsonObject { put() } JsonElement (mapOf("account_id" to "ref", "rating" to rating)).toString(),
-//                        gas = 100_000_000_000_000,
-//                        deposit = 0,
-//                    ),
-//                ),
-//        )
-
-    val signedTransaction = ""
-
-//    val sendNearRequest =
-//        RpcRequest(
-//            jsonRpc = "2.0",
-//            id = dontCareId,
-//            method = "send_tx",
-//            params = buildJsonObject { put("signed_tx_base64", signedTransaction) }.toString(),
-//        )
-
-    val responseTransaction: String =
         client
             .post {
                 setBody(request)
             }.bodyAsText()
 
-    println("Response: $responseTransaction")
+    println(response)
+
+    val keyPairEd25519 =
+        KeyPairEd25519(
+            "5DNCbmYxCTQHHq8tasJPRZ7GsLd8jr8U6jt95vyq95e5SY2ag1nK2ovmMWDG54oH3xMJC24vDMvrQKEgXMseUFbu",
+            "A73A8VEZhCDajeg57DPmiP1kPFY8ESo4mj8knX8zuquH",
+        )
+
+    val account = Account(accountId, "todo", "todo", keyPairEd25519)
+    val res = account.sendMoney(accountId, "0.5")
+
+    println(res)
 
     client.close()
     stopKoin()

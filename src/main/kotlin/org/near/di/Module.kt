@@ -11,25 +11,33 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import org.koin.dsl.module
-import org.near.service.ServiceImpl
+import org.near.client.NearJsonRpcClient
 
+@OptIn(ExperimentalSerializationApi::class)
 val module =
     module {
         single {
             HttpClient(CIO) {
                 install(ContentNegotiation) {
-                    json()
+                    json(
+                        Json {
+                            explicitNulls = false
+                        },
+                    )
                 }
                 install(Logging) {
                     logger = Logger.DEFAULT
                     level = LogLevel.ALL
                 }
                 defaultRequest {
+                    // TODO: configure it
                     url("https://rpc.testnet.near.org")
                     contentType(ContentType.Application.Json)
                 }
             }
         }
-        single { ::ServiceImpl }
+        single { NearJsonRpcClient(get()) }
     }

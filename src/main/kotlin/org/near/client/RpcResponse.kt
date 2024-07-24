@@ -1,13 +1,12 @@
-package org.near.model
+package org.near.client
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.near.Params
+import org.near.Result
 
 @Serializable
-data class RpcRequest(
+data class RpcResponse(
     @SerialName("jsonrpc") val jsonRpc: String,
+    val result: Result,
     val id: String,
-    val method: String,
-    val params: Params,
 )

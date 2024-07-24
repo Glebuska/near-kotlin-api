@@ -1,17 +1,16 @@
 package org.near.model
 
-class KeyPairEd25519(
-    ed25519SecretKey: String,
-    ed25519PublicKey: String,
-) : KeyPair() {
-    var publicKey: PublicKey
-    private var secretKey: String
-    private var data: ByteArray
+import com.syntifi.crypto.key.Ed25519PrivateKey
+import com.syntifi.crypto.key.encdec.Base58
+import kotlinx.serialization.Serializable
 
-    init {
-        val publicKeyAsBytes = Base58.decode(ed25519PublicKey)
-        this.data = Base58.decode(ed25519SecretKey)
-        this.publicKey = PublicKey(KeyType.ED25519, publicKeyAsBytes)
-        this.secretKey = ed25519SecretKey
+@Serializable
+data class KeyPairEd25519(
+    val secretKey: String,
+    val publicKey: String,
+) : KeyPair() {
+    fun sign(message: ByteArray): ByteArray {
+        val privateKey = Ed25519PrivateKey(Base58.decode(secretKey))
+        return privateKey.sign(message)
     }
 }
