@@ -15,7 +15,7 @@ data class PublicKey(
         return "${this.keyTypeToStr(this.keyType)}:$publicKey"
     }
 
-    private fun keyTypeToStr(kType: KeyType): String  {
+    private fun keyTypeToStr(kType: KeyType): String {
         when (kType) {
             KeyType.ED25519 -> return "ed25519"
             else -> {
@@ -23,8 +23,4 @@ data class PublicKey(
             }
         }
     }
-}
-
-enum class KeyType {
-    ED25519,
 }

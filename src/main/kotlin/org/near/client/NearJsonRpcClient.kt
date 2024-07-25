@@ -1,12 +1,15 @@
 package org.near.client
 
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import org.near.client.model.block.Block
-import org.near.client.model.transaction.TransactionResponse
-import org.near.client.model.viewaccesskey.ViewAccessKey
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
+import org.near.client.dto.RequestParams
+import org.near.client.dto.RpcRequest
+import org.near.client.dto.block.Block
+import org.near.client.dto.transaction.TransactionResponse
+import org.near.client.dto.viewaccesskey.ViewAccessKey
 
 class NearJsonRpcClient(
     private val client: HttpClient,

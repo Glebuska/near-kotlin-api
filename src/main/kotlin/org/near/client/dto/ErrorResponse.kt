@@ -1,4 +1,4 @@
-package org.near.client.model
+package org.near.client.dto
 
 import kotlinx.serialization.Serializable
 

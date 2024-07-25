@@ -1,4 +1,4 @@
-package org.near.client.model.viewaccesskey
+package org.near.client.dto.viewaccesskey
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

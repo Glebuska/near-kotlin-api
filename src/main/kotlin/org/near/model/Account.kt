@@ -6,7 +6,7 @@ import com.syntifi.near.borshj.Borsh
 import org.koin.core.component.KoinComponent
 import org.koin.java.KoinJavaComponent.inject
 import org.near.client.NearJsonRpcClient
-import org.near.client.model.transaction.TransactionResponse
+import org.near.client.dto.transaction.TransactionResponse
 import java.math.BigInteger
 import java.util.Base64
 

@@ -1,8 +1,8 @@
-package org.near.client.model.transaction
+package org.near.client.dto.transaction
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.near.client.model.ErrorResponse
+import org.near.client.dto.ErrorResponse
 
 @Serializable
 data class TransactionResponse(
@@ -53,7 +53,7 @@ data class Transfer(
 
 @Serializable
 data class TransactionOutcome(
-    @SerialName("proof") val proof: List<String>,
+    @SerialName("proof") val proof: List<Proof>,
     @SerialName("block_hash") val blockHash: String,
     @SerialName("id") val id: String,
     @SerialName("outcome") val outcome: Outcome,
@@ -67,6 +67,13 @@ data class Outcome(
     @SerialName("tokens_burnt") val tokensBurnt: String,
     @SerialName("executor_id") val executorId: String,
     @SerialName("status") val status: OutcomeStatus,
+    @SerialName("metadata") val metadata: Metadata,
+)
+
+@Serializable
+data class Metadata(
+    @SerialName("gas_profile") val gasProfile: List<String>?,
+    @SerialName("version") val version: Long,
 )
 
 @Serializable
@@ -77,8 +84,14 @@ data class OutcomeStatus(
 
 @Serializable
 data class ReceiptOutcome(
-    @SerialName("proof") val proof: List<String>,
+    @SerialName("proof") val proof: List<Proof>,
     @SerialName("block_hash") val blockHash: String,
     @SerialName("id") val id: String,
     @SerialName("outcome") val outcome: Outcome,
+)
+
+@Serializable
+data class Proof(
+    val hash: String,
+    val direction: String,
 )

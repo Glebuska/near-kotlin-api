@@ -25,6 +25,7 @@ val module =
                     json(
                         Json {
                             explicitNulls = false
+                            ignoreUnknownKeys = true
                         },
                     )
                 }
@@ -33,7 +34,7 @@ val module =
                     level = LogLevel.ALL
                 }
                 defaultRequest {
-                    // TODO: configure it
+                    // TODO: let users to configure it
                     url("https://rpc.testnet.near.org")
                     contentType(ContentType.Application.Json)
                 }

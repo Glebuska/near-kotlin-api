@@ -16,7 +16,7 @@ repositories {
 val ktor_version: String by project
 val logback_version: String by project
 val koin_version: String by project
-val cryptoKeyEd25519Version: String by project
+val crypto_key_ed25519_version: String by project
 
 dependencies {
     testImplementation(kotlin("test"))
@@ -28,8 +28,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.insert-koin:koin-core:$koin_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
-    implementation("com.syntifi.crypto:crypto-key-ed25519:$cryptoKeyEd25519Version")
-    // implementation("io.github.funkatronics:kborsh:0.1.0")
+    implementation("com.syntifi.crypto:crypto-key-ed25519:$crypto_key_ed25519_version")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("borshj-*.jar"))))
 }
 

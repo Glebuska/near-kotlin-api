@@ -1,8 +1,8 @@
-package org.near.client.model.viewaccesskey
+package org.near.client.dto.viewaccesskey
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.near.client.model.ErrorResponse
+import org.near.client.dto.ErrorResponse
 
 @Serializable
 data class ViewAccessKey(

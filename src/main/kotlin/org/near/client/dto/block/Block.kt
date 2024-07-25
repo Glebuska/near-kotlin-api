@@ -1,7 +1,7 @@
-package org.near.client.model.block
+package org.near.client.dto.block
 
 import kotlinx.serialization.Serializable
-import org.near.client.model.ErrorResponse
+import org.near.client.dto.ErrorResponse
 
 @Serializable
 data class Block(
